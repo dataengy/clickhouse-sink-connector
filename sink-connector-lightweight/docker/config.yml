@@ -1,8 +1,9 @@
+# ~/gibus/clickhouse-sink-connector/sink-connector-lightweight/docker/config.yml
 #### Some of the properties are part of Debezium MYSQL Connector
 #### https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-connector-properties
 
 # Unique name for the connector. Attempting to register again with the same name will fail.
-name: "company-1"
+name: "prodamus"
 
 # Primary key used for state storage. Refer to State Storage documentation.
 # If multiple connectors are writing to the same ClickHouse instance, this 
@@ -10,38 +11,40 @@ name: "company-1"
 topic.prefix: "sink-connector-1"
 
 # IP address or hostname of the MySQL database server.
-database.hostname: "mysql-master"
+database.hostname: "c-c9q6n0obpegccorl7o00.ro.mdb.yandexcloud.net"
 
 # Integer port number of the MySQL database server listening for client connections.
 database.port: "3306"
 
 # Name of the MySQL database user to be used when connecting to the database.
-database.user: "root"
+database.user: "clickhouse_user"
 
 # Password of the MySQL database user to be used when connecting to the database.
-database.password: "root"
+database.password: "eip8eiJee8stWaejaXhm"
 
 # Unique name for the connector.
-database.server.id: "12345"
+database.server.id: "1"
 
 # The name of the MySQL database from which events are to be captured when not using snapshot mode.
 database.server.name: "ER54"
 
 # database.include.list An optional list of regular expressions that match database names to be monitored;
 # any database name not included in the whitelist will be excluded from monitoring. By default all databases will be monitored.
-database.include.list: test
+database.include.list: ishop_4,prodamus
 
 # table.include.list An optional list of regular expressions that match fully-qualified table identifiers for tables to be monitored;
-table.include.list: ""
+#table.include.list: "ishop_4.orders_2,prodamus.payment_transaction_registry_2"
+##table.include.list: "ishop_4.orders,prodamus.payment_transaction_registry"
+table.include.list: "ishop_4.domain_config,ishop_4.domains,ishop_4.member_basic,ishop_4.order_products,ishop_4.partners,ishop_4.products,ishop_4.profiles,ishop_4.orders,prodamus.payment_transaction_registry"
 
 # Clickhouse Server URL, Specify only the hostname.
-clickhouse.server.url: "clickhouse"
+clickhouse.server.url: "rc1d-2k89cur3og2vq0j3.mdb.yandexcloud.net"
 
 # Clickhouse Server User
-clickhouse.server.user: "root"
+clickhouse.server.user: "clickhouse_user"
 
 #Clickhouse Server Password
-clickhouse.server.password: "root"
+clickhouse.server.password: "eip8eiJee8stWaejaXhm"
 
 # Clickhouse Server Port
 clickhouse.server.port: "8123"
@@ -54,7 +57,7 @@ database.allowPublicKeyRetrieval: "true"
 snapshot.mode: "initial"
 
 # Snapshot.locking.mode Required for Debezium 2.7.0 and later. The snapshot.locking.mode configuration property specifies the mode that the connector uses to lock tables during snapshotting.
-#snapshot.locking.mode: "minimal"
+snapshot.locking.mode: "none"
 
 # offset.flush.interval.ms: The number of milliseconds to wait before flushing recent offsets to Kafka. This ensures that offsets are committed within the specified time interval.
 offset.flush.interval.ms: 5000
@@ -69,13 +72,13 @@ offset.storage: "io.debezium.storage.jdbc.offset.JdbcOffsetBackingStore"
 offset.storage.jdbc.offset.table.name: "altinity_sink_connector.replica_source_info"
 
 # offset.storage.jdbc.url: The JDBC URL for the database where connector offsets are to be stored.
-offset.storage.jdbc.url: "jdbc:clickhouse://clickhouse:8123/altinity_sink_connector"
+offset.storage.jdbc.url: "jdbc:clickhouse://rc1d-2k89cur3og2vq0j3.mdb.yandexcloud.net:8123/altinity_sink_connector"
 
 # offset.storage.jdbc.user: The name of the database user to be used when connecting to the database where connector offsets are to be stored.
-offset.storage.jdbc.user: "root"
+offset.storage.jdbc.user: "clickhouse_user"
 
 # offset.storage.jdbc.password: The password of the database user to be used when connecting to the database where connector offsets are to be stored.
-offset.storage.jdbc.password: "root"
+offset.storage.jdbc.password: "eip8eiJee8stWaejaXhm"
 
 # offset.storage.jdbc.offset.table.ddl: The DDL statement used to create the database table where connector offsets are to be stored.(Advanced)
 offset.storage.jdbc.offset.table.ddl: "CREATE TABLE if not exists %s
@@ -98,13 +101,13 @@ offset.storage.jdbc.offset.table.select: "SELECT id, offset_key, offset_val FROM
 schema.history.internal: "io.debezium.storage.jdbc.history.JdbcSchemaHistory"
 
 # schema.history.internal.jdbc.url: The JDBC URL for the database where connector schema history is to be stored.
-schema.history.internal.jdbc.url: "jdbc:clickhouse://clickhouse:8123/altinity_sink_connector"
+schema.history.internal.jdbc.url: "jdbc:clickhouse://rc1d-2k89cur3og2vq0j3.mdb.yandexcloud.net:8123/altinity_sink_connector"
 
 # schema.history.internal.jdbc.user: The name of the database user to be used when connecting to the database where connector schema history is to be stored.
-schema.history.internal.jdbc.user: "root"
+schema.history.internal.jdbc.user: "clickhouse_user"
 
 # schema.history.internal.jdbc.password: The password of the database user to be used when connecting to the database where connector schema history is to be stored.
-schema.history.internal.jdbc.password: "root"
+schema.history.internal.jdbc.password: "eip8eiJee8stWaejaXhm"
 
 # schema.history.internal.jdbc.schema.history.table.ddl: The DDL statement used to create the database table where connector schema history is to be stored.(Advanced)
 schema.history.internal.jdbc.schema.history.table.ddl: "CREATE TABLE if not exists %s
@@ -120,7 +123,7 @@ enable.snapshot.ddl: "true"
 persist.raw.bytes: "false"
 
 # auto.create.tables: If set to true, the connector will create tables in the target based on the schema received in the incoming message.
-auto.create.tables: "true"
+auto.create.tables: "false"
 
 # auto.create.tables.replicated: If set to true, the connector will create table with Engine set to ReplicatedReplacingMergeTree
 #"auto.create.tables.replicated: "true"
