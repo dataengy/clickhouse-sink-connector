@@ -30,12 +30,14 @@ database.server.name: "ER54"
 
 # database.include.list An optional list of regular expressions that match database names to be monitored;
 # any database name not included in the whitelist will be excluded from monitoring. By default all databases will be monitored.
-database.include.list: ishop_4,prodamus
+#database.include.list: ishop_4,prodamus
+database.include.list: ishop_4
 
 # table.include.list An optional list of regular expressions that match fully-qualified table identifiers for tables to be monitored;
 #table.include.list: "ishop_4.orders_2,prodamus.payment_transaction_registry_2"
 ##table.include.list: "ishop_4.orders,prodamus.payment_transaction_registry"
-table.include.list: "ishop_4.domain_config,ishop_4.domains,ishop_4.member_basic,ishop_4.order_products,ishop_4.partners,ishop_4.products,ishop_4.profiles,ishop_4.orders,prodamus.payment_transaction_registry"
+#table.include.list: "ishop_4.domain_config,ishop_4.domains,ishop_4.member_basic,ishop_4.order_products,ishop_4.partners,ishop_4.products,ishop_4.profiles,ishop_4.orders,prodamus.payment_transaction_registry"
+table.include.list: "ishop_4.domains"
 
 # Clickhouse Server URL, Specify only the hostname.
 clickhouse.server.url: "rc1d-2k89cur3og2vq0j3.mdb.yandexcloud.net"
